@@ -37,7 +37,7 @@ func AddEntry(service string, login string, pass string) {
 	if errSave != nil {
 		log.Fatal(errSave)
 	} else {
-		fmt.Println("Your informations are saved")
+		fmt.Println("Your informations are saved ! ")
 	}
 
 }
