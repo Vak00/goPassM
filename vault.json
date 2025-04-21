@@ -1,0 +1,12 @@
+[
+  {
+    "service": "spotify",
+    "username": "valou@gmail.com",
+    "password": "myPasswordUltraSecured"
+  },
+  {
+    "service": "gmail",
+    "username": "johnDoe@gmail.com",
+    "password": "hehehehehehehehehe"
+  }
+]

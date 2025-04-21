@@ -1,2 +1,2 @@
 # goPassM
-Little project about in order to discover Go
+Little project about in order to discover Go.
