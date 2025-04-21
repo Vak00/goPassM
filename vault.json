@@ -8,5 +8,25 @@
     "service": "gmail",
     "username": "johnDoe@gmail.com",
     "password": "hehehehehehehehehe"
+  },
+  {
+    "service": "kkk\n",
+    "username": "lll\n",
+    "password": "ppp\n"
+  },
+  {
+    "service": "ssd\nmm\n ",
+    "username": "\nmm ",
+    "password": "\n "
+  },
+  {
+    "service": "kiii",
+    "username": "loooo",
+    "password": "mmmm"
+  },
+  {
+    "service": "ju",
+    "username": "lo",
+    "password": "mp"
   }
 ]
