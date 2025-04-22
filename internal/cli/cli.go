@@ -5,33 +5,54 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"syscall"
 
 	"github.com/Vak00/goPassM/internal/storage"
+	"golang.org/x/term"
 )
 
 func Run() {
-	reader := bufio.NewReader(os.Stdin)
-	firstArg := os.Args[1]
-
-	if firstArg != "add" {
+	if len(os.Args) == 1 {
 		fmt.Println("You need to provide at least one argument.")
 		return
 	}
 
+	firstArg := os.Args[1]
+	if firstArg != "add" {
+		fmt.Println("First arg has to be 'add'")
+		return
+	}
+
 	// Get the input from the user now
-	fmt.Println("Enter your service name : ")
-	service, _ := reader.ReadString('\n')
+	service, login, password := askForOneEntry()
 
-	fmt.Println("Enter your login : ")
-	login, _ := reader.ReadString('\n')
-
-	fmt.Println("Enter your password : ")
-	password, _ := reader.ReadString('\n')
-
-	storage.AddEntry(clear(service), clear(login), clear(password))
+	storage.AddEntry(service, login, password)
 }
 
 // Delete end of line delimiter
 func clear(stringToClean string) string {
 	return strings.Replace(stringToClean, "\n", "", -1)
+}
+
+// Run the form to return entry fields
+func askForOneEntry() (string, string, string) {
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Print("📖 Enter your service name : ")
+	service, _ := reader.ReadString('\n')
+
+	fmt.Print("👤 Enter your login : ")
+	login, _ := reader.ReadString('\n')
+
+	password := AskPassword("Enter your password : ")
+
+	return clear(service), clear(login), clear(password)
+}
+
+// Ask for a password to the user
+func AskPassword(prompt string) string {
+	fmt.Print("🔑 " + prompt)
+	bytePassword, _ := term.ReadPassword(int(syscall.Stdin))
+	fmt.Println()
+	return string(bytePassword)
 }
