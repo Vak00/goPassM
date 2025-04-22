@@ -1,2 +1,9 @@
 # goPassM
-Little project about in order to discover Go.
+Little project to discover Go language.
+
+## Main features
+- Save a list of Service/Login/Password locally
+- Usage of aes
+
+## How to use
+TODO
