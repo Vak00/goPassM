@@ -7,7 +7,6 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/Vak00/goPassM/internal/crypto"
 	"github.com/Vak00/goPassM/internal/storage"
 	"golang.org/x/term"
 )
@@ -46,9 +45,8 @@ func askForOneEntry() (string, string, string) {
 	login, _ := reader.ReadString('\n')
 
 	password := AskPassword("Enter your password : ")
-	hashedPassword, _ := crypto.HashString(clear(password))
 
-	return clear(service), clear(login), hashedPassword
+	return clear(service), clear(login), clear(password)
 }
 
 // Ask for a password to the user

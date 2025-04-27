@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/Vak00/goPassM/internal/cli"
-	"github.com/Vak00/goPassM/internal/crypto"
+	"github.com/Vak00/goPassM/internal/hash"
 )
 
 const masterFilePath = ".master"
@@ -21,7 +21,7 @@ func IsMasterFilePresent() bool {
 }
 
 // Get the content of the master file
-func getHashFromMasterFile() (string, error) {
+func GetHashFromMasterFile() (string, error) {
 	data, err := os.ReadFile(masterFilePath)
 	if err != nil {
 		return "", err
@@ -50,7 +50,7 @@ func AskForPasswordCreation() {
 		fmt.Println("👎 Password are not the same, focus !")
 		os.Exit(1)
 	}
-	hash, err := crypto.HashString(passwordOne)
+	hash, err := hash.HashString(passwordOne)
 	if err != nil {
 		fmt.Println("❌ Error during the creation of the hash : " + err.Error())
 		os.Exit(1)
@@ -61,13 +61,13 @@ func AskForPasswordCreation() {
 // Ask and compare the user master password
 func AskForMasterPassword() {
 	userpassword := cli.AskPassword("Enter the master password : ")
-	hashFromFile, err := getHashFromMasterFile()
+	hashFromFile, err := GetHashFromMasterFile()
 	if err != nil {
 		fmt.Println("Error occured when try to get the master password from file: " + err.Error())
 		os.Exit(1)
 	}
 
-	if !crypto.IsSameHash(hashFromFile, userpassword) {
+	if !hash.IsSameHash(hashFromFile, userpassword) {
 		fmt.Println("⛔️ Password incorrect, exit")
 		os.Exit(0)
 	}
