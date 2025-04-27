@@ -48,5 +48,20 @@
     "service": "dde",
     "username": "sdsdsd",
     "password": "sdsdsd"
+  },
+  {
+    "service": "serviceA",
+    "username": "loginOne",
+    "password": "pass"
+  },
+  {
+    "service": "lalal",
+    "username": "ldldldldl",
+    "password": "mdmdmd"
+  },
+  {
+    "service": "di",
+    "username": "do",
+    "password": "da"
   }
 ]

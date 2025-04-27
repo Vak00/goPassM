@@ -38,6 +38,7 @@ func saveMasterHash(base65password string) {
 	fmt.Println("✅ Master password saved !")
 }
 
+// Ask for the creation of the master password + save it in the master file
 func AskForPasswordCreation() {
 	fmt.Println("You have to enter a master password in order to register some entries.")
 	fmt.Println("This password will be requested each time you run this app. Try not forget it ! 😎")
@@ -60,16 +61,12 @@ func AskForPasswordCreation() {
 // Ask and compare the user master password
 func AskForMasterPassword() {
 	userpassword := cli.AskPassword("Enter the master password : ")
-
 	hashFromFile, err := getHashFromMasterFile()
-	fmt.Println("HASH FROM FILE: " + hashFromFile)
 	if err != nil {
 		fmt.Println("Error occured when try to get the master password from file: " + err.Error())
 		os.Exit(1)
 	}
 
-	isSame := crypto.IsSameHash(hashFromFile, userpassword)
-	fmt.Printf("IS SMAE : %t", isSame)
 	if !crypto.IsSameHash(hashFromFile, userpassword) {
 		fmt.Println("⛔️ Password incorrect, exit")
 		os.Exit(0)

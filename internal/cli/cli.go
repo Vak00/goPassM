@@ -53,6 +53,7 @@ func askForOneEntry() (string, string, string) {
 func AskPassword(prompt string) string {
 	fmt.Print("🔑 " + prompt)
 	bytePassword, _ := term.ReadPassword(int(syscall.Stdin))
+	// To force the next Print() on the next line
 	fmt.Println()
 	return string(bytePassword)
 }

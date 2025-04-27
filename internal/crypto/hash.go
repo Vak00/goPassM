@@ -17,6 +17,10 @@ func HashString(text string) (string, error) {
 
 // Return true if the given hash is the same than the given string, else fasle
 func IsSameHash(base64Hash string, password string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(base64Hash), []byte(password))
+	hashBytes, err := base64.StdEncoding.DecodeString(base64Hash)
+	if err != nil {
+		return false
+	}
+	err = bcrypt.CompareHashAndPassword(hashBytes, []byte(password))
 	return err == nil
 }
