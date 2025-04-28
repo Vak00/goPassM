@@ -10,11 +10,11 @@ func main() {
 	// Start signals listening
 	signals.StartSignalListener()
 
-	cli.Run()
-
 	if auth.IsMasterFilePresent() {
 		auth.AskForMasterPassword()
 	} else {
 		auth.AskForPasswordCreation()
 	}
+
+	cli.AskAndShowMenu()
 }

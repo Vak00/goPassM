@@ -1,10 +1,11 @@
 package signals
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/Vak00/goPassM/internal/cli"
 )
 
 // Start the listening for the system signals
@@ -13,10 +14,7 @@ func StartSignalListener() {
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
 	go func() {
-		sig := <-sigchan
-		fmt.Println()
-		fmt.Printf("Signal %s received. TODO: manage the save of the current modifications befroe interrupt\n", sig)
-
-		os.Exit(0)
+		<-sigchan
+		cli.CommandQuit()
 	}()
 }

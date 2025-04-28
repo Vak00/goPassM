@@ -106,34 +106,3 @@ func LoadEncryptedData(masterHashPass string) ([]byte, error) {
 
 	return plaintext, nil
 }
-
-// Decrypt a giver text based on the key and nonce
-// ciphertext: contains the nonce+text
-func Decrypt(ciphertext []byte, key []byte) ([]byte, error) {
-	// create cipher block
-	block, err := aes.NewCipher(key)
-	if err != nil {
-		return nil, err
-	}
-	// create GCM
-	aesGCM, err := cipher.NewGCM(block)
-	if err != nil {
-		return nil, err
-	}
-
-	// split the cipher and the nonce
-	// format: nonce+text
-	nonceSize := aesGCM.NonceSize()
-	if len(ciphertext) < nonceSize {
-		return nil, fmt.Errorf("❌ Error occured during the decryption: ciphertext too short")
-	}
-	nonce, actualCiphertext := ciphertext[:nonceSize], ciphertext[nonceSize:]
-
-	// decrypt
-	plaintext, err := aesGCM.Open(nil, nonce, actualCiphertext, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return plaintext, nil
-}

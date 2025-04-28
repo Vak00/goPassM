@@ -7,31 +7,64 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/Vak00/goPassM/internal/storage"
+	"github.com/Vak00/goPassM/internal/model"
 	"golang.org/x/term"
 )
 
-func Run() {
-	if len(os.Args) == 1 {
-		fmt.Println("You need to provide at least one argument.")
-		return
+var commands = []model.Command{
+	{
+		Name:        "add",
+		Alias:       "a",
+		Description: "Add a new entry to the vault",
+		Action:      commandAdd,
+	},
+	{
+		Name:        "list",
+		Alias:       "l",
+		Description: "List all entries from the vault",
+		Action:      commandList,
+	},
+	{
+		Name:        "help",
+		Alias:       "h",
+		Description: "Show help menu",
+		Action:      commandHelp,
+	},
+	{
+		Name:        "quit",
+		Alias:       "q",
+		Description: "Quit the app",
+		Action:      CommandQuit,
+	},
+}
+
+func AskAndShowMenu() {
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Println("\n -- Menu -- ")
+	for _, cmd := range commands {
+		fmt.Printf(" - %s (%s): %s\n", cmd.Name, cmd.Alias, cmd.Description)
 	}
 
-	firstArg := os.Args[1]
-	if firstArg != "add" {
-		fmt.Println("First arg has to be 'add'")
-		return
+	fmt.Println()
+	fmt.Print("Choose an option : ")
+	commandInput, _ := reader.ReadString('\n')
+	commandCleared := clear(commandInput)
+
+	for _, cmd := range commands {
+		if cmd.Name == commandCleared || cmd.Alias == commandCleared {
+			cmd.Action()
+			AskAndShowMenu()
+			return
+		}
 	}
 
-	// Get the input from the user now
-	service, login, password := askForOneEntry()
-
-	storage.AddEntry(service, login, password)
+	fmt.Printf("❌ Error, the command '%s' is not available.\n", commandCleared)
 }
 
 // Delete end of line delimiter
-func clear(stringToClean string) string {
-	return strings.Replace(stringToClean, "\n", "", -1)
+func clear(s string) string {
+	return strings.TrimSpace(s)
 }
 
 // Run the form to return entry fields
