@@ -1,7 +1,7 @@
 # goPassM
 Password manager written in Go.
 
-![logo goPassM](logoKey.png)
+![logo goPassM](logo.png)
 ## Description
 
 I made this little project in order to discover the Go language concepts. This is a tool in CLI for now.
