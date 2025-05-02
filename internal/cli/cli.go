@@ -13,16 +13,22 @@ import (
 
 var commands = []model.Command{
 	{
+		Name:        "list",
+		Alias:       "l",
+		Description: "List all entries from the vault",
+		Action:      commandList,
+	},
+	{
 		Name:        "add",
 		Alias:       "a",
 		Description: "Add a new entry to the vault",
 		Action:      commandAdd,
 	},
 	{
-		Name:        "list",
-		Alias:       "l",
-		Description: "List all entries from the vault",
-		Action:      commandList,
+		Name:        "edit",
+		Alias:       "e",
+		Description: "Edit one entry",
+		Action:      commandEdit,
 	},
 	{
 		Name:        "help",

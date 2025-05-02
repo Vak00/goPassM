@@ -43,10 +43,8 @@ command to run if program contains helper info
 ## Roadmap
 
 - [] Tests
-- [] Mettre .master autre part
-- [] Mettre vault autre part + nom hash + cache
-- [] harmoniser les logs 
-- [] checker les normes des commentaires de fonctions
+- [] Mettre vault et master autre part + nom hash + cache
+- [] harmoniser les logs
 - [] Mettre session en place pour ne pas demander le password pour chaque action
 
 - [] Essayer auth biometrique ??

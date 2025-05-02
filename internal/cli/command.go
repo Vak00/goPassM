@@ -3,16 +3,17 @@ package cli
 import (
 	"fmt"
 	"os"
+
+	"github.com/Vak00/goPassM/internal/service"
 )
 
 // Allow the user to add a new Entry
 func commandAdd() {
 	fmt.Println("✏️  Add new entry")
 	fmt.Println()
-	entryService, _, _ := askForOneEntry()
+	login, ser, password := askForOneEntry()
 
-	fmt.Println()
-	fmt.Println("✅ New entry for " + entryService + " saved !")
+	service.AddEntry(login, ser, password)
 }
 
 func commandHelp() {
@@ -21,6 +22,12 @@ func commandHelp() {
 
 func commandList() {
 	fmt.Println("List command here")
+	service.ListEntry()
+}
+
+func commandEdit() {
+	fmt.Println("Edit command here")
+	service.EditEntry()
 }
 
 func CommandQuit() {
