@@ -42,12 +42,18 @@ command to run if program contains helper info
 
 ## Roadmap
 
-- [] Tests
-- [] Mettre vault et master autre part + nom hash + cache
-- [] harmoniser les logs
-- [] Mettre session en place pour ne pas demander le password pour chaque action
+- [] Do the tests
+- [] Put the vault file and .master file somewhere else + hide them
+- [] Harmonize logs + better managment of the logs
+- [] Use Interface instead of Struct for the Command
+- [] Purpose random generated password for entries
+- [] Add check for the master password (lenght + complexity)
 
-- [] Essayer auth biometrique ??
+### Minor
+- [] Create an UI
+- [] Create session manageemnt to avoid the user put password each time
+- [] Try using biometric system
+- [] Use Cobra (cli manager)
 ## Version History
 
 // TODO

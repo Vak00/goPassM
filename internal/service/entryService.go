@@ -2,21 +2,20 @@ package service
 
 import "fmt"
 
-func AddEntry(login string, service string, password string) {
+func AddEntry(vault *VaultService) {
 	fmt.Println()
 	fmt.Println("Add entry service here")
 
-	fmt.Println("Recievd : " + login + " service : " + service + " pass : " + password)
 }
 
-func ListEntry() {
+func ListEntry(vault *VaultService) {
 	fmt.Println("List entry service here")
 }
 
-func EditEntry() {
+func EditEntry(vault *VaultService) {
 	fmt.Println("Edit entry service here")
 }
 
-func DeleteEntry() {
+func DeleteEntry(vault *VaultService) {
 	fmt.Println("Delete entry service here")
 }

@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/Vak00/goPassM/internal/auth"
 	"github.com/Vak00/goPassM/internal/cli"
+	"github.com/Vak00/goPassM/internal/model"
+	"github.com/Vak00/goPassM/internal/service"
 	"github.com/Vak00/goPassM/internal/signals"
 )
 
@@ -16,5 +18,8 @@ func main() {
 		auth.AskForPasswordCreation()
 	}
 
-	cli.AskAndShowMenu()
+	var entries []model.Entry
+	vaultService := service.NewVaultService(entries)
+
+	cli.AskAndShowMenu(vaultService)
 }

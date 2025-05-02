@@ -7,28 +7,28 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/Vak00/goPassM/internal/model"
+	"github.com/Vak00/goPassM/internal/service"
 	"golang.org/x/term"
 )
 
-var commands = []model.Command{
+var commands = []Command{
 	{
 		Name:        "list",
 		Alias:       "l",
 		Description: "List all entries from the vault",
-		Action:      commandList,
+		Action:      service.ListEntry,
 	},
 	{
 		Name:        "add",
 		Alias:       "a",
 		Description: "Add a new entry to the vault",
-		Action:      commandAdd,
+		Action:      service.AddEntry,
 	},
 	{
 		Name:        "edit",
 		Alias:       "e",
 		Description: "Edit one entry",
-		Action:      commandEdit,
+		Action:      service.EditEntry,
 	},
 	{
 		Name:        "help",
@@ -44,7 +44,7 @@ var commands = []model.Command{
 	},
 }
 
-func AskAndShowMenu() {
+func AskAndShowMenu(vault *service.VaultService) {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("\n -- Menu -- ")
@@ -59,8 +59,8 @@ func AskAndShowMenu() {
 
 	for _, cmd := range commands {
 		if cmd.Name == commandCleared || cmd.Alias == commandCleared {
-			cmd.Action()
-			AskAndShowMenu()
+			cmd.Action(vault)
+			AskAndShowMenu(vault)
 			return
 		}
 	}
@@ -74,7 +74,7 @@ func clear(s string) string {
 }
 
 // Run the form to return entry fields
-func askForOneEntry() (string, string, string) {
+func AskForOneEntry() (string, string, string) {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print("📖 Enter your service name : ")
