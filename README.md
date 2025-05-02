@@ -1,6 +1,7 @@
 # goPassM
 Password manager written in Go.
 
+![logo goPassM](logoKey.png)
 ## Description
 
 I made this little project in order to discover the Go language concepts. This is a tool in CLI for now.
@@ -47,7 +48,6 @@ command to run if program contains helper info
 - [] harmoniser les logs 
 - [] checker les normes des commentaires de fonctions
 - [] Mettre session en place pour ne pas demander le password pour chaque action
-- [] Faire le menu dynamique
 
 - [] Essayer auth biometrique ??
 ## Version History
