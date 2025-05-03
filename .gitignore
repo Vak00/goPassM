@@ -26,5 +26,6 @@ go.work.sum
 .DS_Store
 
 # master file
+.data
 .master
 vault.json

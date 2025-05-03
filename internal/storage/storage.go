@@ -1,19 +1,13 @@
 package storage
 
 import (
+	"encoding/json"
 	"os"
+
+	"github.com/Vak00/goPassM/internal/store"
 )
 
 const FileName = ".data"
-
-// // Save all entries to a Json file
-// func SaveEntries(entries []model.Entry) error {
-// 	data, err := json.MarshalIndent(entries, "", "  ")
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return os.WriteFile(FileName, data, 0600)
-// }
 
 // Save the data in this order: salt(16 bytes) + nonce(32 bytes) + ciphertext concatenated
 func SaveToFile(salt, nonce, ciphertext []byte) error {
@@ -33,4 +27,13 @@ func GetEncryptedFileContent() ([]byte, error) {
 		return nil, err
 	}
 	return fileData, nil
+}
+
+// Create the json file based on the vault content and return it
+func CreateJsonFileFromVault(vault *store.VaultStore) ([]byte, error) {
+	data, err := json.MarshalIndent(vault.GetAll(), "", "  ")
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }

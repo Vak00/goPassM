@@ -1,22 +1,22 @@
-package service
+package store
 
 import "github.com/Vak00/goPassM/internal/model"
 
-type VaultService struct {
+type VaultStore struct {
 	entries []model.Entry
 }
 
 // Init a new VaultService struct with a list of Entry
-func NewVaultService(entries []model.Entry) *VaultService {
-	return &VaultService{entries: entries}
+func NewVaultStore(entries []model.Entry) *VaultStore {
+	return &VaultStore{entries: entries}
 }
 
 // Add a new entry to the vault
-func (vault *VaultService) AddEntry(entry model.Entry) {
+func (vault *VaultStore) AddEntry(entry model.Entry) {
 	vault.entries = append(vault.entries, entry)
 }
 
 // Get all entries registered in the vault
-func (vault *VaultService) GetAll() []model.Entry {
+func (vault *VaultStore) GetAll() []model.Entry {
 	return vault.entries
 }

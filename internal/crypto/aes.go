@@ -72,16 +72,22 @@ func SaveEncryptedVault(plaintext []byte, masterHashPass string) error {
 	return storage.SaveToFile(salt, nonce, ciphertext)
 }
 
+// Load and decrypted the data from the vault file
 func LoadEncryptedData(masterHashPass string) ([]byte, error) {
 	encryptedData, errFile := storage.GetEncryptedFileContent()
 	if errFile != nil {
 		return nil, fmt.Errorf("❌ Failed to load the encrypted file: %v", errFile)
 	}
 
-	// Extract the salt(32 bytes), the nonce(16 bytes) and the ciphertext
-	salt := encryptedData[:32]
-	nonce := encryptedData[:32:44] // Salt size + nonce size
-	cipherText := encryptedData[:44]
+	// If there is no file
+	if len(encryptedData) == 0 {
+		return nil, fmt.Errorf("⚠️ Current vault file not found")
+	}
+
+	// Extract the salt(16 bytes), the nonce(16 bytes) and the ciphertext
+	salt := encryptedData[:16]
+	nonce := encryptedData[16:28] // 12 bytes de nonce (typique GCM)
+	cipherText := encryptedData[28:]
 
 	// Get the key
 	key, errKey := getDerivedKeyFromMasterHash(masterHashPass, salt)

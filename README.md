@@ -50,6 +50,7 @@ command to run if program contains helper info
 - [] Add check for the master password (lenght + complexity)
 
 ### Minor
+- [] Use 2FA ?
 - [] Create an UI
 - [] Create session manageemnt to avoid the user put password each time
 - [] Try using biometric system

@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Vak00/goPassM/internal/cli"
 	"github.com/Vak00/goPassM/internal/hash"
+	"github.com/Vak00/goPassM/internal/input"
 )
 
 const masterFilePath = ".master"
@@ -39,12 +39,13 @@ func saveMasterHash(base65password string) {
 }
 
 // Ask for the creation of the master password + save it in the master file
-func AskForPasswordCreation() {
+// Return the clear password
+func AskForPasswordCreation() string {
 	fmt.Println("You have to enter a master password in order to register some entries.")
 	fmt.Println("This password will be requested each time you run this app. Try not forget it ! 😎")
 
-	passwordOne := cli.AskPassword("Enter your master password : ")
-	passwordTwo := cli.AskPassword("Confirm your master password : ")
+	passwordOne := input.AskPassword("Enter your master password : ")
+	passwordTwo := input.AskPassword("Confirm your master password : ")
 
 	if strings.Compare(passwordOne, passwordTwo) != 0 {
 		fmt.Println("👎 Password are not the same, focus !")
@@ -56,11 +57,13 @@ func AskForPasswordCreation() {
 		os.Exit(1)
 	}
 	saveMasterHash(hash)
+	return passwordOne
 }
 
 // Ask and compare the user master password
-func AskForMasterPassword() {
-	userpassword := cli.AskPassword("Enter the master password : ")
+// Return the clear password
+func AskForMasterPassword() string {
+	userpassword := input.AskPassword("Enter the master password : ")
 	hashFromFile, err := GetHashFromMasterFile()
 	if err != nil {
 		fmt.Println("Error occured when try to get the master password from file: " + err.Error())
@@ -72,4 +75,5 @@ func AskForMasterPassword() {
 		os.Exit(0)
 	}
 	fmt.Println("✅ Access granted")
+	return userpassword
 }
