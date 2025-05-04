@@ -42,12 +42,15 @@ command to run if program contains helper info
 
 ## Roadmap
 
+- [] Maybe bypass the file data and juste use a masterPAssword as base to derive key
+
 - [] Do the tests
 - [] Put the vault file and .master file somewhere else + hide them
 - [] Harmonize logs + better managment of the logs
 - [] Use Interface instead of Struct for the Command
-- [] Purpose random generated password for entries
+- [] Purpose random generated password for entries + copy to clipboard
 - [] Add check for the master password (lenght + complexity)
+
 
 ### Minor
 - [] Use 2FA ?

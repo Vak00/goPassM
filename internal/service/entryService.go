@@ -13,7 +13,8 @@ import (
 
 func AddEntry(vault *store.VaultStore) {
 	fmt.Println()
-	fmt.Println("Add entry service here")
+	fmt.Println(" -- Add a new entry -- ")
+	fmt.Println()
 
 	login, service, pass := input.AskForOneEntry()
 
