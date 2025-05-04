@@ -25,6 +25,8 @@ func main() {
 		masterPassword = auth.AskForPasswordCreation()
 	}
 
+	auth.SetMasterPassword(masterPassword)
+
 	// Load exsting entries if exists, else empty slice
 	var entries []model.Entry
 	plainText, err := crypto.LoadEncryptedData(masterPassword)

@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 
+	"github.com/Vak00/goPassM/internal/auth"
 	"github.com/Vak00/goPassM/internal/crypto"
 	"github.com/Vak00/goPassM/internal/input"
 	"github.com/Vak00/goPassM/internal/model"
@@ -53,7 +54,8 @@ func SaveVault(vault *store.VaultStore) {
 		fmt.Println("❌ Impossible to create the vault file : " + err.Error())
 		return
 	}
-	crypto.SaveEncryptedVault(data, "aaa")
+	crypto.SaveEncryptedVault(data, auth.GetMasterPassword())
 	fmt.Println("✅ Data saved ! ")
+	auth.ClearMasterPassword()
 	input.ExitApp()
 }

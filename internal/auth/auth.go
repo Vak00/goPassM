@@ -9,6 +9,8 @@ import (
 	"github.com/Vak00/goPassM/internal/input"
 )
 
+var masterPassword string
+
 const masterFilePath = ".master"
 
 // Return true if the master file exists, else false
@@ -76,4 +78,18 @@ func AskForMasterPassword() string {
 	}
 	fmt.Println("✅ Access granted")
 	return userpassword
+}
+
+func SetMasterPassword(password string) {
+	masterPassword = password
+}
+
+func GetMasterPassword() string {
+	return masterPassword
+}
+
+// Erase the masterPassword var, to be carefull
+// Todo: use memguard
+func ClearMasterPassword() {
+	masterPassword = ""
 }
